@@ -2,7 +2,7 @@
 
 A high-performance personal portfolio built with Next.js 16, GSAP, Three.js, and CSS Modules. Designed to be forked and used as your own.
 
-**Live:** [kalyan-addepalli.vercel.app](https://kalyan-addepalli.vercel.app) &nbsp;|&nbsp; **GitHub:** [Kalyan-git-2002/cinematic-portfolio](https://github.com/Kalyan-git-2002/cinematic-portfolio)
+**Live:*([https://kalyan-addepalli.vercel.app](https://kalyan-addepalli.vercel.app/)) &nbsp;|&nbsp; **GitHub:** [Kalyan-git-2002/cinematic-portfolio](https://github.com/Kalyan-git-2002/cinematic-portfolio)
 
 If this helped you, consider leaving a ⭐ on GitHub.
 
