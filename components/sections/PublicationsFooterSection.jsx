@@ -13,7 +13,7 @@ import profile from '@/data/profile.json'
 import content from '@/data/content.json'
 import styles from '@/styles/sections/PublicationsFooterSection.module.css'
 
-const PUBS = profile.publications
+const CERTS = profile.certifications
 
 const SOCIAL_ICONS = {
   GitHub:    <FaGithub    size={13} />,
@@ -84,7 +84,7 @@ function handleViewProjects() {
   if (scroller) gsap.to(scroller, { scrollTop: 3 * window.innerHeight, duration: 1.0, ease: 'power3.inOut' })
 }
 
-export default function PublicationsFooterSection() {
+export default function CertificationsFooterSection() {
   const wrapperRef = useRef(null)
   const stickyRef  = useRef(null)
 
@@ -92,7 +92,7 @@ export default function PublicationsFooterSection() {
   const imageWrapRef    = useRef(null)
   const imageOverlayRef = useRef(null)
 
-  // publication content
+  // certification content
   const pubContentRef = useRef(null)
   const labelRef      = useRef(null)
   const headingRef    = useRef(null)
@@ -199,7 +199,7 @@ export default function PublicationsFooterSection() {
       tick()
     }
 
-    // ── Publication entry animation ───────────────────────────
+    // ── Certification entry animation ───────────────────────────
     let pubAnimDone = false
 
     function resetPubAnim() {
@@ -236,7 +236,7 @@ export default function PublicationsFooterSection() {
       // getBoundingClientRect is reliable regardless of offsetParent chain or navbar
       const dist = -wrapper.getBoundingClientRect().top
 
-      // Entry: play pub animation when section first enters view
+      // Entry: play certification animation when section first enters view
       if (dist > -vh * 0.5 && dist < vh * 0.35) {
         playPubAnim()
       } else if (dist < -vh * 0.4) {
@@ -247,7 +247,7 @@ export default function PublicationsFooterSection() {
       // 300vh/svh wrapper → 2 viewports of scroll travel (same for mobile + desktop)
       const p = Math.max(0, Math.min(1, dist / (2 * vh)))
 
-      // ── Phase 1: pub text fades out ──────────────────────
+      // ── Phase 1: certification text fades out ──────────────────────
       // Mobile: p 0 → 0.25 | Desktop: p 0 → 0.28
       const pubFadeEnd = isMobile ? 0.25 : 0.28
       const pubFade = 1 - Math.max(0, Math.min(1, p / pubFadeEnd))
@@ -256,7 +256,7 @@ export default function PublicationsFooterSection() {
       const vw = window.innerWidth
 
       if (isMobile) {
-        // footer-mobile.webp static background - interstitial fades between pub and footer
+        // footer-mobile.webp static background - interstitial fades between certification and footer
         const interIn  = Math.max(0, Math.min(1, (p - 0.28) / 0.17))
         const interOut = Math.max(0, Math.min(1, (p - 0.60) / 0.12))
         gsap.set(interstitialRef.current, { opacity: interIn * (1 - interOut), pointerEvents: 'none' })
@@ -276,7 +276,7 @@ export default function PublicationsFooterSection() {
           gsap.set(imageOverlayRef.current, { opacity: 1 - imgP })
         }
 
-        // ── Interstitial: fade in after pub, fade out before crossfade ──
+        // ── Interstitial: fade in after certification, fade out before crossfade ──
         const interIn  = Math.max(0, Math.min(1, (p - 0.25) / 0.15))
         const interOut = Math.max(0, Math.min(1, (p - 0.54) / 0.14))
         gsap.set(interstitialRef.current, { opacity: interIn * (1 - interOut), pointerEvents: 'none' })
@@ -361,24 +361,21 @@ export default function PublicationsFooterSection() {
           <div ref={imageOverlayRef} className={styles.imageOverlay} />
         </div>
 
-        {/* ── Publication content (right of image) ── */}
+        {/* ── Certification content (right of image) ── */}
         <div ref={pubContentRef} className={styles.pubContent}>
-          <span className={styles.watermark} aria-hidden>WRITING</span>
+          <span className={styles.watermark} aria-hidden>CERTIFICATIONS</span>
 
           <div className={styles.pubHero}>
-            <p  ref={labelRef}   className={styles.label}>Research &amp; Writing</p>
-            <h2 ref={headingRef} className={styles.heading}>Publications</h2>
+            <p  ref={labelRef}   className={styles.label}>Verified Credentials</p>
+            <h2 ref={headingRef} className={styles.heading}>Certifications</h2>
           </div>
 
           <div ref={dividerRef} className={styles.divider} />
 
           <div className={styles.list}>
-            {PUBS.map((pub, i) => (
-              <a
-                key={pub.id}
-                href={pub.link}
-                target="_blank"
-                rel="noopener noreferrer"
+            {CERTS.map((pub, i) => (
+              <div
+                key={i}
                 ref={el => { itemRefs.current[i] = el }}
                 className={styles.item}
               >
@@ -386,17 +383,14 @@ export default function PublicationsFooterSection() {
                 <div className={styles.itemBody}>
                   <div className={styles.itemTop}>
                     <h3 className={styles.title}>{pub.title}</h3>
-                    <span className={styles.platform}>{pub.platform}</span>
+                    <span className={styles.platform}>{pub.issuer}</span>
                   </div>
-                  <p className={styles.desc}>{pub.desc}</p>
+                  <p className={styles.desc}>{pub.date}</p>
                 </div>
                 <div className={styles.itemRight}>
-                  <span className={styles.year}>{pub.year}</span>
-                  <span className={styles.readBtn}>
-                    Read <FiArrowUpRight size={11} />
-                  </span>
+                  <span className={styles.year}>{pub.date.split(' ').pop()}</span>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>
@@ -552,7 +546,7 @@ export default function PublicationsFooterSection() {
           <div ref={bottomBarRef} className={styles.bottomBar}>
             <div className={styles.bottomLeft}>
               <div className={styles.monogram}>
-                <span className={styles.monoLetters}>VK</span>
+                <span className={styles.monoLetters}>KA</span>
                 <span className={styles.monoDot} />
               </div>
               <span className={styles.leftDivider} />

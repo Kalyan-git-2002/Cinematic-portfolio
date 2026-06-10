@@ -3,7 +3,7 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-export const alt = 'Vaibhav Khushalani | Full Stack Developer'
+export const alt = 'Kalyan Addepalli | Data Analyst'
 
 export const size = {
   width: 1200,
@@ -80,7 +80,7 @@ export default function Image() {
                 textTransform: 'uppercase',
               }}
             >
-              SOFTWARE DEVELOPER
+              DATA ANALYST
             </span>
           </div>
 
@@ -100,7 +100,7 @@ export default function Image() {
                 letterSpacing: -4,
               }}
             >
-              VAIBHAV
+              KALYAN
             </span>
 
             <span
@@ -111,7 +111,7 @@ export default function Image() {
                 letterSpacing: -4,
               }}
             >
-              KHUSHALANI
+              ADDEPALLI
             </span>
           </div>
 
@@ -125,8 +125,7 @@ export default function Image() {
               marginBottom: 34,
             }}
           >
-            Building cinematic digital experiences with modern web
-            technologies & AI.
+            Data Analyst specializing in PySpark, Power BI, Databricks, AWS S3. Building production-grade pipelines and dashboards.
           </div>
 
           {/* TAGS */}
@@ -139,10 +138,10 @@ export default function Image() {
             }}
           >
             {[
-              'AI Architect',
-              'Full Stack',
-              'Next.js',
-              'MERN Stack',
+              'Power BI',
+              'PySpark',
+              'Databricks',
+              'AWS S3',
             ].map((tag) => (
               <div
                 key={tag}
@@ -169,9 +168,9 @@ export default function Image() {
             }}
           >
             {[
-              ['4+', 'Years'],
-              ['20+', 'Projects'],
-              ['AI + FS', 'Specialist'],
+              ['20K+', 'Orders'],
+              ['2+', 'Projects'],
+              ['100%', 'Automated'],
             ].map(([value, label]) => (
               <div
                 key={label}
@@ -222,7 +221,7 @@ export default function Image() {
             src={photoUrl}
             width={420}
             height={630}
-            alt="Vaibhav Khushalani"
+            alt="Kalyan Addepalli"
             style={{
               objectFit: 'cover',
             }}
@@ -250,7 +249,7 @@ export default function Image() {
             letterSpacing: 2,
           }}
         >
-          vaibhav-create.vercel.app
+          kalyan-addepalli.vercel.app
         </div>
       </div>
     ),

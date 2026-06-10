@@ -3,20 +3,20 @@
     "tagline": "Portfolio 2026"
   },
   "hero": {
-    "taglineHighlight": "experiences",
-    "freelanceNote": "Available for freelance & full-time opportunities.",
+    "taglineHighlight": "dashboards",
+    "freelanceNote": "Open to remote and pan-India opportunities.",
     "availableLabel": "Available for work",
-    "pills": ["AI Architect", "Full Stack Engineer", "Cinematic Creator", "MERN Stack"],
-    "specialistStat": { "value": "AI + Full Stack", "label": "Specialist" }
+    "pills": ["Data Analyst", "BI Analyst", "Power BI Developer", "PySpark developer"],
+    "specialistStat": { "value": "BI + Data Pipelines", "label": "Specialist" }
   },
   "interstitial": {
     "availabilityLabel": "Availability",
     "basedInLabel": "Based in",
-    "statLabels": ["Years\nexperience", "Projects\ndelivered", "Companies\nworked at"]
+    "statLabels": ["Orders\nprocessed", "Projects\ndeployed", "Automated\npipelines"]
   },
   "footer": {
-    "eyebrow": "Available for collaborations",
-    "ctaLines": ["Crafting modern", "digital products", "that feel"],
-    "ctaAccent": "alive."
+    "eyebrow": "Open to roles",
+    "ctaLines": ["Building production grade pipelines", "and live dashboards", "that actually"],
+    "ctaAccent": "work."
   }
 }

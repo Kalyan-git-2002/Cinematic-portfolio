@@ -7,25 +7,32 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
+  padding: 0.85rem 1.5rem;
   color: var(--navbar-text);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.35s ease;
 }
 
 .time {
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  transition: color 0.3s ease;
+  color: #1a0800;
 }
 
 .navLink {
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
-  color: var(--navbar-text);
-  transition: opacity 0.2s;
+  color: #1a0800;
+  transition: opacity 0.2s, color 0.3s ease;
 }
 
 .navLink:hover {
@@ -40,10 +47,10 @@
   align-items: center;
   justify-content: center;
   background: transparent;
-  color: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #1a0800;
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
   text-decoration: none;
-  transition: color 0.35s ease;
+  transition: color 0.35s ease, border-color 0.35s ease;
 }
 
 .emailBtn::after {
@@ -58,26 +65,32 @@
 }
 
 .emailBtn:hover {
-  color: #000;
+  color: #fff;
+  border-color: var(--accent);
 }
 
 .emailBtn:hover::after {
   transform: scaleX(1);
 }
 
-/* ── Dark section mode (Work Experience) ────── */
+/* ── Dark section mode (Work Experience / Projects) ────── */
 .darkMode {
-  --navbar-text: rgba(255, 255, 255, 0.88);
-  color: rgba(255, 255, 255, 0.88);
+  background: rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
+.darkMode .time,
 .darkMode .navLink {
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .darkMode .emailBtn {
-  color: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+
+.darkMode .emailBtn:hover {
+  color: #000;
 }
 
 /* ── VideoIntro mode: hide time + nav, keep email only ── */
@@ -102,10 +115,11 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--navbar-text);
+  color: #1a0800;
   padding: 0.25rem;
   align-items: center;
   justify-content: center;
+  transition: color 0.3s ease;
 }
 
 @media (max-width: 767px) {
@@ -113,10 +127,16 @@
   .emailBtn  { display: none; }
 }
 
+.darkMode .hamburger {
+  color: rgba(255, 255, 255, 0.95);
+}
+
 .mobileMenu {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.97);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   z-index: 50;
   display: flex;
   flex-direction: column;
@@ -128,23 +148,23 @@
 .mobileNavLink {
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.75);
+  color: #1a0800;
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: color 0.2s, opacity 0.2s;
   font-family: var(--font-geist-sans);
 }
 
 .mobileNavLink:hover {
-  color: var(--accent);
+  opacity: 0.6;
 }
 
 .mobileMailLink {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(0, 0, 0, 0.5);
   text-decoration: none;
   margin-top: 1rem;
   letter-spacing: 0.06em;

@@ -1,10 +1,11 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import Image from 'next/image'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
 import profile from '@/data/profile.json'
 import styles from '@/styles/sections/ProjectsSection.module.css'
+import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa'
 
 const PROJECTS = profile.projects
 
@@ -16,6 +17,44 @@ export default function ProjectsSection() {
   const counterRef  = useRef(null)
   const progressRef = useRef(null)
   const [slideIdx, setSlideIdx] = useState(0)
+
+  // Lightbox State
+  const [lightbox, setLightbox] = useState({
+    isOpen: false,
+    images: [],
+    currentIdx: 0,
+  })
+
+  const openLightbox = useCallback((images) => {
+    if (!images || images.length === 0) return
+    setLightbox({
+      isOpen: true,
+      images: images,
+      currentIdx: 0,
+    })
+    document.body.style.overflow = 'hidden'
+  }, [])
+
+  const closeLightbox = useCallback(() => {
+    setLightbox(prev => ({ ...prev, isOpen: false }))
+    document.body.style.overflow = ''
+  }, [])
+
+  const nextImage = useCallback((e) => {
+    e?.stopPropagation()
+    setLightbox(prev => ({
+      ...prev,
+      currentIdx: (prev.currentIdx + 1) % prev.images.length
+    }))
+  }, [])
+
+  const prevImage = useCallback((e) => {
+    e?.stopPropagation()
+    setLightbox(prev => ({
+      ...prev,
+      currentIdx: (prev.currentIdx - 1 + prev.images.length) % prev.images.length
+    }))
+  }, [])
 
   useEffect(() => {
     const section = sectionRef.current
@@ -35,7 +74,7 @@ export default function ProjectsSection() {
 
     const tl = gsap.timeline({ paused: true })
 
-    // Horizontal slide - xPercent is viewport-independent
+    // Horizontal slide
     tl.to(track, {
       xPercent: -((n - 1) / n * 100),
       ease: 'none',
@@ -104,8 +143,20 @@ export default function ProjectsSection() {
       },
     })
 
-    return () => st.kill()
-  }, [])
+    // Keyboard listener for lightbox
+    const handleKeyDown = (e) => {
+      if (!lightbox.isOpen) return
+      if (e.key === 'ArrowRight') nextImage()
+      if (e.key === 'ArrowLeft') prevImage()
+      if (e.key === 'Escape') closeLightbox()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      st.kill()
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [lightbox.isOpen, nextImage, prevImage, closeLightbox])
 
   return (
     <div style={{ height: `${PROJECTS.length * 100}vh` }}>
@@ -132,7 +183,8 @@ export default function ProjectsSection() {
 
               <div
                 ref={el => { bgRefs.current[i] = el }}
-                className={styles.slideBg}
+                className={`${styles.slideBg} ${proj.gallery ? styles.clickableThumbnail : ''}`}
+                onClick={() => proj.gallery && openLightbox(proj.gallery)}
               >
                 <Image
                   src={proj.image}
@@ -160,17 +212,28 @@ export default function ProjectsSection() {
                   </div>
                   <h2 className={styles.title}>{proj.title}</h2>
                   <p  className={styles.subtitle}>{proj.subtitle}</p>
-                  <a
-                    href={proj.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.liveBtn}
-                  >
-                    <span>Live Demo</span>
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
-                      <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </a>
+                  <div className="flex gap-4">
+                    <a
+                      href={proj.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.liveBtn}
+                    >
+                      <span>{proj.id === 1 ? 'GitHub Repo' : 'Live Demo'}</span>
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
+                        <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </a>
+                    {proj.gallery && (
+                      <button
+                        onClick={() => openLightbox(proj.gallery)}
+                        className={styles.liveBtn}
+                        style={{ background: 'transparent', border: '1px solid var(--accent)', color: 'var(--accent)' }}
+                      >
+                        <span>View Gallery</span>
+                      </button>
+                    )}
+                  </div>
                 </div>
 
                 <div className={styles.slideRight}>
@@ -195,6 +258,42 @@ export default function ProjectsSection() {
         </div>
 
       </section>
+
+      {/* Lightbox Modal */}
+      <div
+        className={`${styles.lightboxOverlay} ${lightbox.isOpen ? styles.active : ''}`}
+        onClick={closeLightbox}
+      >
+        <button className={styles.closeBtn} onClick={closeLightbox}>
+          <FaTimes size={32} />
+        </button>
+
+        <div className={styles.lightboxContent} onClick={e => e.stopPropagation()}>
+          {lightbox.images.length > 1 && (
+            <button className={`${styles.navBtn} ${styles.prevBtn}`} onClick={prevImage}>
+              <FaChevronLeft size={20} />
+            </button>
+          )}
+
+          <div className={styles.lightboxImageWrap}>
+            {lightbox.images[lightbox.currentIdx] && (
+              <Image
+                src={lightbox.images[lightbox.currentIdx]}
+                alt="Project detail"
+                fill
+                className={styles.lightboxImg}
+                quality={100}
+              />
+            )}
+          </div>
+
+          {lightbox.images.length > 1 && (
+            <button className={`${styles.navBtn} ${styles.nextBtn}`} onClick={nextImage}>
+              <FaChevronRight size={20} />
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

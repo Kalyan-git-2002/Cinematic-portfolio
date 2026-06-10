@@ -2,7 +2,7 @@
 
 A high-performance personal portfolio built with Next.js 16, GSAP, Three.js, and CSS Modules. Designed to be forked and used as your own.
 
-**Live:** [vaibhav-create.vercel.app](https://vaibhav-create.vercel.app) &nbsp;|&nbsp; **GitHub:** [VaibhavKhushalani/cinematic-portfolio](https://github.com/VaibhavKhushalani/cinematic-portfolio)
+**Live:** [kalyan-addepalli.vercel.app](https://kalyan-addepalli.vercel.app) &nbsp;|&nbsp; **GitHub:** [Kalyan-git-2002/cinematic-portfolio](https://github.com/Kalyan-git-2002/cinematic-portfolio)
 
 If this helped you, consider leaving a ⭐ on GitHub.
 
@@ -19,7 +19,7 @@ If this helped you, consider leaving a ⭐ on GitHub.
 ## Getting Started
 
 ```bash
-git clone https://github.com/VaibhavKhushalani/cinematic-portfolio.git
+git clone https://github.com/Kalyan-git-2002/cinematic-portfolio.git
 cd cinematic-portfolio
 npm install
 npm run dev
@@ -51,7 +51,7 @@ All personal information lives in `data/profile.json`. Open that file and update
 | `skills`         | Skills shown in the scrolling marquee               |
 | `experience`     | Work history with company, role, bullets, and stack |
 | `projects`       | Project cards with title, description, and links    |
-| `publications`   | Blog posts or articles you have written             |
+| `certifications` | Professional certifications and credentials        |
 | `socials`        | Social profile links (GitHub, LinkedIn, etc.)       |
 
 Website copy that is not personal data (section taglines, CTA text, footer phrases) lives in `data/content.json`. You can leave these as-is or update them to match your tone.
@@ -92,6 +92,6 @@ MIT. Free to fork, adapt, and use as your own portfolio.
 
 ## Author
 
-**Vaibhav Khushalani** — Full Stack Engineer & AI Builder
+**Kalyan Addepalli** — Data Analyst · BI Analyst · Power BI Developer
 
-[GitHub](https://github.com/VaibhavKhushalani) &nbsp;|&nbsp; [LinkedIn](https://www.linkedin.com/in/vaibhav-khushalani-760217136) &nbsp;|&nbsp; [Medium](https://medium.com/@vaibhavkhushalani) &nbsp;|&nbsp; [Instagram](https://www.instagram.com/vaibhav.create) &nbsp;|&nbsp; [YouTube](https://www.youtube.com/@vaibhav.create)
+[GitHub](https://github.com/Kalyan-git-2002) &nbsp;|&nbsp; [LinkedIn](https://linkedin.com/in/kalyan-addepalli88)
